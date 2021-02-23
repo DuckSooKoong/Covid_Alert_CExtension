@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Covid19 Alert Extension</title>
+    <link rel="stylesheet"  href="/asset/css/style.css">
 </head>
 <body>
-    <h2>hello world</h2>
+    <p id = 'center'>
+        <h1><strong>COVID19 Alert System</strong></h1>
+        <div id="root">
+
+            <button type ="button" id ="modal_open_btn">
+                지역 선택
+            </button>
+
+        </div>
+        <div id="modal">
+            <div class = "modal_content">
+                <h1>지역 리스트</h1>
+                <p>
+
+                    지역리스트 선택지
+
+
+
+
+
+
+
+
+
+
+
+                </p>
+
+                <button type ="button" id="modal_close_btn">
+                    <strong>
+                        X
+                    </strong>
+                </button>
+            </div>
+            <div class="modal_layer"></div>
+        </div>
+    
+        
+        <script src ="/frontend/js/modal.js"></script>
+    </p>
+    
 </body>
 </html>
