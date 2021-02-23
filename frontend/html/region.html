@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <title>지역을 선택하세요</title>
-    <link rel="stylesheet"  href="/asset/css/style.css">
+    <link rel="stylesheet" href="/asset/css/style.css">
 </head>
 
 <body>
@@ -10,19 +11,17 @@
         <h1>지역을 선택하세요</h1>
         <a href="/frontend/html/index.html"><button>돌아가기</button></a>
         <legend>지역 리스트</legend>
-        <select name="지역">
-            <option value="경기도">경기도</option>
-            <optgroup label="서울">
-               <option value="송파구">송파구</option>
-               <option value="관악구">관악구</option>
-            </optgroup>
-            <option value="대전">대전</option>
-       </select>
+        <h4>다중 선택을 위해 Ctrl+클릭을 해주세요</h2>
+        <select id = "selectbox" name="지역" multiple="multiple">
+            <script src="/frontend/js/region.js"></script>
+        </select>
     </div>
-
     <div>
-
+        <button id = "selectBtn">선택하기</button>
     </div>
     
+
+
 </body>
+
 </html>
