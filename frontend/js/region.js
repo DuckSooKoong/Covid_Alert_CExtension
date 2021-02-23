@@ -279,20 +279,30 @@ var obj = {
 };
 
 for (let key in obj) {
-    document.write("<optgroup label=" + obj[key]+">");
-    for(let tmp in obj[key]){
-        const value = obj[key][tmp];
-        document.write("<option>" + value + "</option>");
-    }
-    document.write("</optgroup>");
+  document.write("<optgroup label=" + obj[key] + ">");
+  for (let tmp in obj[key]) {
+    const value = obj[key][tmp];
+    document.write("<option>" + value + "</option>");
+  }
+  document.write("</optgroup>");
 }
 
-function chageLangSelect(){
-        var langSelect = document.getElementById("selectbox");
-         
-        // select element에서 선택된 option의 value가 저장된다.
-        var selectValue = langSelect.options[langSelect.selectedIndex].value;
-     
-        // select element에서 선택된 option의 text가 저장된다.
-        var selectText = langSelect.options[langSelect.selectedIndex].text;
+function chageLangSelect() {
+  var langSelect = document.getElementById("selectbox");
+
+  return langSelect;
+  
+}
+
+function changeselectValue() {
+  const langSelect = chageLangSelect();
+  var selectValue = langSelect.options[langSelect.selectedIndex].value;
+  return selectValue;
+}
+
+function changeselectText() {
+  const langSelect = chageLangSelect();
+  var selectText = langSelect.options[langSelect.selectedIndex].text;
+
+  return selectText;
 }
