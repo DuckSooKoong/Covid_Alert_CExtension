@@ -6,11 +6,11 @@
     <script src="safekorea.js"></script>
 </head>
 <body>
-    <form id ="keyword_form">
+    <form id ="keyword_form" onsubmit="controller()">
         <input type="text" name="keyword" value="모텔">
         <!-- <input type="text" name="keyword" value="검사"> -->
     </form>
-    <button onclick="a()">검색</button>
+    <button onclick="controller()">검색</button>
     <div id="descriptions"></div>
     <div id="num_of_result"></div>
 </body>

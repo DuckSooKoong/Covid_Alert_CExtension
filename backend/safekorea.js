@@ -6,74 +6,65 @@ queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'
 queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); /**/
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
-let json;
+let json_description;
 
 function getAllData() {
+    var description = "";
     var count = 0;
     if (localStorage.length == 0) {
         update();
     }
     else {
-        json = JSON.parse(localStorage.getItem('json'));
+        json_description = JSON.parse(localStorage.getItem('json'));
         for (var i = 0; i < 1000; i++) {
             count++;
-            document.write("<div class=\"description\">");
-            document.write("<p>"+ json.row[i].create_date + "</p>");
-            document.write("<p>"+ json.row[i].location_name + "</p>");
-            document.write("<p>"+ json.row[i].msg + "</p>");
-            document.write("</div>");
+            description += "<div class=\"description\"><p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
         }
+        document.getElementById("descriptions").innerHTML = description;
+        document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
     }
-    document.write("<div class=\"num_result\">");
-    document.write("<p>총 " + count +"건의 검색 결과가 있습니다.</p>");
-    document.write("</div>")
 }
 
 function getRegionData(region) {
+    var description = "";
     var count = 0;
     if (localStorage.length == 0) {
         update();
     }
     else {
-        json = JSON.parse(localStorage.getItem('json'));
+        json_description = JSON.parse(localStorage.getItem('json'));
         for (var i = 0; i < 1000; i++) {
             for (var j = 0; j < region.length; j++) {
-                if (json.row[i].location_name == region[j]) {
+                if (json_description.row[i].location_name == region[j]) {
                     count++;
-                    document.write("<div class=\"description\">");
-                    document.write("<p>" + json.row[i].create_date + "</p>");
-                    document.write("<p>" + json.row[i].location_name + "</p>")
-                    document.write("<p>" + json.row[i].msg + "</p>");
-                    document.write("</div>");
+                    description += "<div class=\"description\"><p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
                 }
             }
         }
+        document.getElementById("descriptions").innerHTML = description;
+        document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
     }
-    document.write("<div class=\"num_result\">");
-    document.write("<p>총 " + count +"건의 검색 결과가 있습니다.</p>");
-    document.write("</div>")
 }
 
 function getKeywordData(keyword) {
+    var description = "";
     if(localStorage.length == 0) {
         update();
     }
     else {
-        json = JSON.parse(localStorage.getItem('json'));
-        var description = "";
+        json_description = JSON.parse(localStorage.getItem('json'));
         var count = 0;
         for (var i = 0; i < 1000; i++) {
             for (var j = 0; j < keyword.length; j++) {
-                if ((json.row[i].msg).indexOf(keyword[j].value) != -1) {
+                if ((json_description.row[i].msg).indexOf(keyword[j].value) != -1) {
                     count++;
-                    description += "<div class=\"description\"><p>" + json.row[i].create_date + "</p><p>" + json.row[i].location_name + "</p><p>" + json.row[i].msg + "</p></div>";
+                    description += "<div class=\"description\"><p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
                 }
             }
         }
+        document.getElementById("descriptions").innerHTML = description;
+        document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
     }
-    
-    document.getElementById("descriptions").innerHTML = description;
-    document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
 }
 
 function update() {
@@ -93,20 +84,13 @@ function update() {
 }
 
 // window.onload = function() {
-function a() {
+function controller() {
     var keyword_form = document.getElementById("keyword_form").elements;
     var keywords = [];
     for (var i = 0; i < keyword_form.length; i++) {
         keywords.push(keyword_form[i]);
     }
     getKeywordData(keywords);
-    // var text = keywords[0].value + "<br>" + keywords[1].value;
-    // document.getElementById("description").innerHTML = text;
-    // document.getElementById('keyword_form').onclick = function() {
-    //     var keywords = document.getElementById("submit");
-    //     document.getElementById("description").innerHTML = "<div><p>"+keywords[0]+"</p><p>"+keywords[1]+"</p></div>"
-        // document.write(keywords[0]);
-        // getKeywordData(keywords);
 }
 
 // window.onload = update();
