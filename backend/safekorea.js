@@ -6,11 +6,16 @@ queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'
 queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); /**/
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
-var json = '';
+let json;
+let list;
 
 function getData() {
-    document.getElementById('data').innerHTML = "this.responseText";
-    
+    if (localStorage.length == 0) {
+        update();
+    }
+    json = JSON.parse(localStorage.getItem('json'));
+    let result = json.DisasterMsg[1].row[0].msg;
+    document.getElementById('data').innerHTML = result;
 }
 
 function update() {
@@ -20,12 +25,10 @@ function update() {
     
     xhr.onreadystatechange = function () {  // readyState 속성이 변경될 때마나 호출
         if (this.readyState == 4) {
-            json = JSON.parse(this.responseText);
-            var result = json.DisasterMsg[1].row[0].msg;
-            document.getElementById('data').innerHTML = result;
+            localStorage.setItem('json', this.responseText);
         }
     };
     xhr.send();
 }
 
-window.onload = update;
+window.onload = getData;
