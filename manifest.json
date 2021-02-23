@@ -4,7 +4,7 @@
     "description": "COVID19 Alert Extension",
     
     "browser_action": {
-        "default_popup": "/frontend/html/popup.html",
+        "default_popup": "/frontend/html/index.html",
         "default_title": "COVID19 Alert Extension"
     },
 
