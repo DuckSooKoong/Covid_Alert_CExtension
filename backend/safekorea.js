@@ -55,28 +55,25 @@ function getRegionData(region) {
 }
 
 function getKeywordData(keyword) {
-    var count = 0;
     if(localStorage.length == 0) {
         update();
     }
     else {
         json = JSON.parse(localStorage.getItem('json'));
+        var description = "";
+        var count = 0;
         for (var i = 0; i < 1000; i++) {
             for (var j = 0; j < keyword.length; j++) {
-                if ((json.row[i].msg).indexOf(keyword[j]) != -1) {
+                if ((json.row[i].msg).indexOf(keyword[j].value) != -1) {
                     count++;
-                    document.write("<div class=\"description\">");
-                    document.write("<p>" + json.row[i].create_date + "</p>");
-                    document.write("<p>" + json.row[i].location_name + "</p>")
-                    document.write("<p>" + json.row[i].msg + "</p>");
-                    document.write("</div>");
+                    description += "<div class=\"description\"><p>" + json.row[i].create_date + "</p><p>" + json.row[i].location_name + "</p><p>" + json.row[i].msg + "</p></div>";
                 }
             }
         }
     }
-    document.write("<div class=\"num_result\">");
-    document.write("<p>총 " + count +"건의 검색 결과가 있습니다.</p>");
-    document.write("</div>")
+    
+    document.getElementById("descriptions").innerHTML = description;
+    document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
 }
 
 function update() {
@@ -95,7 +92,24 @@ function update() {
     xhr.send();
 }
 
+// window.onload = function() {
+function a() {
+    var keyword_form = document.getElementById("keyword_form").elements;
+    var keywords = [];
+    for (var i = 0; i < keyword_form.length; i++) {
+        keywords.push(keyword_form[i]);
+    }
+    getKeywordData(keywords);
+    // var text = keywords[0].value + "<br>" + keywords[1].value;
+    // document.getElementById("description").innerHTML = text;
+    // document.getElementById('keyword_form').onclick = function() {
+    //     var keywords = document.getElementById("submit");
+    //     document.getElementById("description").innerHTML = "<div><p>"+keywords[0]+"</p><p>"+keywords[1]+"</p></div>"
+        // document.write(keywords[0]);
+        // getKeywordData(keywords);
+}
+
 // window.onload = update();
 // window.onload = getAllData();
 // window.onload = getRegionData(['충청북도 음성군', '경상북도 경주시', '부산광역시 전체']);
-window.onload = getKeywordData(['호텔']);
+// window.onload = getKeywordData(['호텔']);
