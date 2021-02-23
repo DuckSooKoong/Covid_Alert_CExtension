@@ -15,5 +15,12 @@ h1{
 }
 
 div{
+    margin-top: 3mm;
+    margin-bottom: 3mm;
     text-align: center;
+}
+
+select{
+    width: 150px;
+    height: 300px;
 }
