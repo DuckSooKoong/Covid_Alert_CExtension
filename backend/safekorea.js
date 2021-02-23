@@ -22,6 +22,21 @@ function getAllData() {
     }
 }
 
+function getRegionData(region) {
+    if (localStorage.length == 0) {
+        update();
+    }
+    json = JSON.parse(localStorage.getItem('json'));
+    for (var i = 0; i < 1000; i++) {
+        for (var j = 0; j < region.length; j++) {
+            if (json.DisasterMsg[1].row[i].location_name == region[j]) {
+                document.write("<p>" + json.DisasterMsg[1].row[i].create_date + "</p>");
+                document.write("<p>" + json.DisasterMsg[1].row[i].location_name + "</p>")
+                document.write("<p>" + json.DisasterMsg[1].row[i].msg + "</p>");
+            }
+        }
+    }
+}
 
 function update() {
     xhr.open('GET', url + queryParams);     // 요청 초기화
@@ -36,4 +51,5 @@ function update() {
     xhr.send();
 }
 
-window.onload = getAllData;
+window.onload = getAllData();
+// window.onload = getRegionData(['충청북도 음성군', '경상북도 경주시', '부산광역시 전체']);
