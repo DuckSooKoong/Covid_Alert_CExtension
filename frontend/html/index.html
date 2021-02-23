@@ -11,17 +11,17 @@
     <p id='center'>
     <h1><strong>COVID19 Alert System</strong></h1>
     <div>
-        <button onclick="getAllData()">최신 1000개의 알림 문자 보기</button>
+        <input type="button" id="all_data" value="최신 1000개의 알림 문자 보기">
         <a href="/frontend/html/region.html"><button>지역별 알림 문자 보기</button></a>
     </div>
     <div>
         <h1>알림</h1>
         <p>키워드로 검색하기</p>
         <div id="descriptions">
-            <form id="keyword_form" onsubmit="controller()">
-                <input type="text" name="keyword" value="확진">
+            <div id="keyword_form">
+                <input type="text" id="keyword" name="keyword" value="확진">
                 <input type="submit" value="검색">
-            </form>
+            </div>
             <div id="num_of_result"></div>
         </div>
     </div>

@@ -7,7 +7,7 @@ queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
 let json_description;
-let base_description = "<form id =\"keyword_form\" onsubmit=\"controller()\"><div class=\"description\"><input type=\"text\" name=\"keyword\"></form><input type=\"submit\" value=\"검색\"><div id=\"num_of_result\"></div>"
+let base_description = "<div id =\"keyword_form\" onsubmit=\"controller()\"><div class=\"description\"><input type=\"text\" id=\"keyword\" name=\"keyword\"></div><input type=\"submit\" value=\"검색\"><div id=\"num_of_result\"></div>"
 
 function getAllData() {
     var description = base_description;
@@ -49,20 +49,19 @@ function getRegionData(region) {
 
 function getKeywordData(keyword) {
     var description = base_description;
-    if(localStorage.length == 0) {
+    if (localStorage.length == 0) {
         update();
     }
     else {
         json_description = JSON.parse(localStorage.getItem('json'));
         var count = 0;
         for (var i = 0; i < 1000; i++) {
-            for (var j = 0; j < keyword.length; j++) {
-                if ((json_description.row[i].msg).indexOf(keyword[j].value) != -1) {
-                    count++;
-                    description += "<p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
-                }
+            if ((json_description.row[i].msg).indexOf(keyword.value) != -1) {
+                count++;
+                description += "<p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
             }
         }
+
         document.getElementById("descriptions").innerHTML = description;
         document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
     }
@@ -85,14 +84,16 @@ function update() {
 }
 
 // window.onload = function() {
-function controller() {
-    var keyword_form = document.getElementById("keyword_form").elements;
-    var keywords = [];
-    for (var i = 0; i < keyword_form.length; i++) {
-        keywords.push(keyword_form[i]);
-    }
-    getKeywordData(keywords);
+function keyword_controller() {
+    var keyword = document.getElementById("keyword").value;
+    getKeywordData(keyword);
 }
+
+window.onload = document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("keyword_form").onclick = keyword_controller();
+    document.getElementById("all_data").onclick = getAllData();
+});
+
 
 // window.onload = update();
 // window.onload = getAllData();
