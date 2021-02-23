@@ -7,21 +7,26 @@ queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
 let json;
-let list;
 
-function getData() {
+function getAllData() {
     if (localStorage.length == 0) {
         update();
     }
     json = JSON.parse(localStorage.getItem('json'));
-    let result = json.DisasterMsg[1].row[0].msg;
-    document.getElementById('data').innerHTML = result;
+    for (var i = 0; i < 1000; i++) {
+        document.write("<div>");
+        document.write("<p>"+ json.DisasterMsg[1].row[i].create_date + "</p>");
+        document.write("<p>"+ json.DisasterMsg[1].row[i].location_name + "</p>");
+        document.write("<p>"+ json.DisasterMsg[1].row[i].msg + "</p>");
+        document.write("</div>");
+    }
 }
+
 
 function update() {
     xhr.open('GET', url + queryParams);     // 요청 초기화
     
-    document.getElementById('data').innerHTML = "Loading..."
+    // document.getElementById('data').innerHTML = "Loading..."
     
     xhr.onreadystatechange = function () {  // readyState 속성이 변경될 때마나 호출
         if (this.readyState == 4) {
@@ -31,4 +36,4 @@ function update() {
     xhr.send();
 }
 
-window.onload = getData;
+window.onload = getAllData;
