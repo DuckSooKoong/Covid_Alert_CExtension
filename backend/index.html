@@ -6,12 +6,15 @@
     <script src="safekorea.js"></script>
 </head>
 <body>
-    <form id ="keyword_form">
-        <input type="text" name="keyword" value="모텔">
-        <!-- <input type="text" name="keyword" value="검사"> -->
+    
+    <div id="descriptions">
+    <form id ="keyword_form" onsubmit="controller()">
+        <input type="text" name="keyword" value="확진">
+        <input type="submit" value="검색">
     </form>
-    <button onclick="a()">검색</button>
-    <div id="descriptions"></div>
+    <button onclick="getAllData()">전체 목록 보기(1000개)</button>
     <div id="num_of_result"></div>
+    </div>
+
 </body>
 </html>
