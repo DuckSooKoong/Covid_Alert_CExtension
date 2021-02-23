@@ -15,9 +15,9 @@ function getAllData() {
     json = JSON.parse(localStorage.getItem('json'));
     for (var i = 0; i < 1000; i++) {
         document.write("<div>");
-        document.write("<p>"+ json.DisasterMsg[1].row[i].create_date + "</p>");
-        document.write("<p>"+ json.DisasterMsg[1].row[i].location_name + "</p>");
-        document.write("<p>"+ json.DisasterMsg[1].row[i].msg + "</p>");
+        document.write("<p>"+ json.row[i].create_date + "</p>");
+        document.write("<p>"+ json.row[i].location_name + "</p>");
+        document.write("<p>"+ json.row[i].msg + "</p>");
         document.write("</div>");
     }
 }
@@ -29,27 +29,40 @@ function getRegionData(region) {
     json = JSON.parse(localStorage.getItem('json'));
     for (var i = 0; i < 1000; i++) {
         for (var j = 0; j < region.length; j++) {
-            if (json.DisasterMsg[1].row[i].location_name == region[j]) {
-                document.write("<p>" + json.DisasterMsg[1].row[i].create_date + "</p>");
-                document.write("<p>" + json.DisasterMsg[1].row[i].location_name + "</p>")
-                document.write("<p>" + json.DisasterMsg[1].row[i].msg + "</p>");
+            if (json.row[i].location_name == region[j]) {
+                document.write("<div>");
+                document.write("<p>" + json.row[i].create_date + "</p>");
+                document.write("<p>" + json.row[i].location_name + "</p>")
+                document.write("<p>" + json[1].row[i].msg + "</p>");
+                document.write("</div>");
             }
         }
     }
 }
 
+function getKeywordData(keyword) {
+    if(localStorage.length == 0) {
+        update();
+    }
+    json = JSON.parse(localStorage.getItem('json'));
+}
+
 function update() {
+    // localStorage.clear();
     xhr.open('GET', url + queryParams);     // 요청 초기화
     
-    // document.getElementById('data').innerHTML = "Loading..."
-    
+    document.write("<p>loading...</p>");
     xhr.onreadystatechange = function () {  // readyState 속성이 변경될 때마나 호출
         if (this.readyState == 4) {
-            localStorage.setItem('json', this.responseText);
+            let tmp_json = JSON.parse(this.responseText);
+            let tmp_str = JSON.stringify(tmp_json.DisasterMsg[1]);
+            localStorage.setItem('json', tmp_str);
+            document.write("<p>finished!</p>");
         }
     };
     xhr.send();
 }
 
+// window.onload = update();
 window.onload = getAllData();
 // window.onload = getRegionData(['충청북도 음성군', '경상북도 경주시', '부산광역시 전체']);
