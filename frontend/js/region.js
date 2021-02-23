@@ -277,7 +277,6 @@ var obj = {
   세종특별자치시: ["세종특별자치시 전체", "세종특별자치시"],
   "임진강 수계지역(경기도 연천군,파주시)": ["경기도 파주시", "경기도 연천군"],
 };
-console.log(obj.강원도);
 
 for (let key in obj) {
     document.write("<optgroup label=" + obj[key]+">");
@@ -288,12 +287,12 @@ for (let key in obj) {
     document.write("</optgroup>");
 }
 
-// function chageLangSelect(){
-//         var langSelect = document.getElementById("selectbox");
-//          
-//         // select element에서 선택된 option의 value가 저장된다.
-//         var selectValue = langSelect.options[langSelect.selectedIndex].value;
-//      
-//         // select element에서 선택된 option의 text가 저장된다.
-//         var selectText = langSelect.options[langSelect.selectedIndex].text;
-// }
+function chageLangSelect(){
+        var langSelect = document.getElementById("selectbox");
+         
+        // select element에서 선택된 option의 value가 저장된다.
+        var selectValue = langSelect.options[langSelect.selectedIndex].value;
+     
+        // select element에서 선택된 option의 text가 저장된다.
+        var selectText = langSelect.options[langSelect.selectedIndex].text;
+}
