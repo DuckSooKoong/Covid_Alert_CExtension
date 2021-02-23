@@ -7,9 +7,10 @@ queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
 let json_description;
+let base_description = "<form id =\"keyword_form\" onsubmit=\"controller()\"><div class=\"description\"><input type=\"text\" name=\"keyword\"></form><input type=\"submit\" value=\"검색\"><div id=\"num_of_result\"></div>"
 
 function getAllData() {
-    var description = "";
+    var description = base_description;
     var count = 0;
     if (localStorage.length == 0) {
         update();
@@ -26,7 +27,7 @@ function getAllData() {
 }
 
 function getRegionData(region) {
-    var description = "";
+    var description = base_description;
     var count = 0;
     if (localStorage.length == 0) {
         update();
@@ -47,7 +48,7 @@ function getRegionData(region) {
 }
 
 function getKeywordData(keyword) {
-    var description = "";
+    var description = base_description;
     if(localStorage.length == 0) {
         update();
     }
@@ -58,7 +59,7 @@ function getKeywordData(keyword) {
             for (var j = 0; j < keyword.length; j++) {
                 if ((json_description.row[i].msg).indexOf(keyword[j].value) != -1) {
                     count++;
-                    description += "<div class=\"description\"><p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
+                    description += "<p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
                 }
             }
         }
