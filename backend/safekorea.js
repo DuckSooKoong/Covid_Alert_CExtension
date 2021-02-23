@@ -9,46 +9,78 @@ queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y');
 let json;
 
 function getAllData() {
+    var count = 0;
     if (localStorage.length == 0) {
         update();
     }
-    json = JSON.parse(localStorage.getItem('json'));
-    for (var i = 0; i < 1000; i++) {
-        document.write("<div>");
-        document.write("<p>"+ json.row[i].create_date + "</p>");
-        document.write("<p>"+ json.row[i].location_name + "</p>");
-        document.write("<p>"+ json.row[i].msg + "</p>");
-        document.write("</div>");
+    else {
+        json = JSON.parse(localStorage.getItem('json'));
+        for (var i = 0; i < 1000; i++) {
+            count++;
+            document.write("<div class=\"description\">");
+            document.write("<p>"+ json.row[i].create_date + "</p>");
+            document.write("<p>"+ json.row[i].location_name + "</p>");
+            document.write("<p>"+ json.row[i].msg + "</p>");
+            document.write("</div>");
+        }
     }
+    document.write("<div class=\"num_result\">");
+    document.write("<p>총 " + count +"건의 검색 결과가 있습니다.</p>");
+    document.write("</div>")
 }
 
 function getRegionData(region) {
+    var count = 0;
     if (localStorage.length == 0) {
         update();
     }
-    json = JSON.parse(localStorage.getItem('json'));
-    for (var i = 0; i < 1000; i++) {
-        for (var j = 0; j < region.length; j++) {
-            if (json.row[i].location_name == region[j]) {
-                document.write("<div>");
-                document.write("<p>" + json.row[i].create_date + "</p>");
-                document.write("<p>" + json.row[i].location_name + "</p>")
-                document.write("<p>" + json[1].row[i].msg + "</p>");
-                document.write("</div>");
+    else {
+        json = JSON.parse(localStorage.getItem('json'));
+        for (var i = 0; i < 1000; i++) {
+            for (var j = 0; j < region.length; j++) {
+                if (json.row[i].location_name == region[j]) {
+                    count++;
+                    document.write("<div class=\"description\">");
+                    document.write("<p>" + json.row[i].create_date + "</p>");
+                    document.write("<p>" + json.row[i].location_name + "</p>")
+                    document.write("<p>" + json.row[i].msg + "</p>");
+                    document.write("</div>");
+                }
             }
         }
     }
+    document.write("<div class=\"num_result\">");
+    document.write("<p>총 " + count +"건의 검색 결과가 있습니다.</p>");
+    document.write("</div>")
 }
 
 function getKeywordData(keyword) {
+    var count = 0;
     if(localStorage.length == 0) {
         update();
     }
-    json = JSON.parse(localStorage.getItem('json'));
+    else {
+        json = JSON.parse(localStorage.getItem('json'));
+        for (var i = 0; i < 1000; i++) {
+            for (var j = 0; j < keyword.length; j++) {
+                if ((json.row[i].msg).indexOf(keyword[j]) != -1) {
+                    count++;
+                    document.write("<div class=\"description\">");
+                    document.write("<p>" + json.row[i].create_date + "</p>");
+                    document.write("<p>" + json.row[i].location_name + "</p>")
+                    document.write("<p>" + json.row[i].msg + "</p>");
+                    document.write("</div>");
+                }
+            }
+        }
+    }
+    document.write("<div class=\"num_result\">");
+    document.write("<p>총 " + count +"건의 검색 결과가 있습니다.</p>");
+    document.write("</div>")
 }
 
 function update() {
-    // localStorage.clear();
+    localStorage.clear();
     xhr.open('GET', url + queryParams);     // 요청 초기화
     
     document.write("<p>loading...</p>");
@@ -57,12 +89,13 @@ function update() {
             let tmp_json = JSON.parse(this.responseText);
             let tmp_str = JSON.stringify(tmp_json.DisasterMsg[1]);
             localStorage.setItem('json', tmp_str);
-            document.write("<p>finished!</p>");
+            // document.write("<p>finished!</p>");
         }
     };
     xhr.send();
 }
 
 // window.onload = update();
-window.onload = getAllData();
+// window.onload = getAllData();
 // window.onload = getRegionData(['충청북도 음성군', '경상북도 경주시', '부산광역시 전체']);
+window.onload = getKeywordData(['호텔']);
