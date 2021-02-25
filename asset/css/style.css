@@ -1,27 +1,39 @@
-a.button{
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    color: initial;
-}
-
 body{
     width: 300px;
     height: auto;
     max-height: 500px;
+    -ms-overflow-style: none;
 }
+
+::-webkit-scrollbar { display: none; }
 
 h1{
     text-align: center;
 }
 
 div{
-    margin-top: 3mm;
-    margin-bottom: 3mm;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     text-align: center;
 }
 
-select{
-    width: 150px;
-    height: 300px;
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #4c6baf;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-decoration: none;
+    margin: 2px 1px;
+    cursor: pointer;
+}
+
+.p-key {
+    font-size: 20px;
+}
+
+input[type=text] {
+    border: 0;
+    padding: 7px 15px;
+    border: 1px solid #ccc;
+    background: transparent;
 }

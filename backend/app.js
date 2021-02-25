@@ -87,30 +87,30 @@ function showSelectRegion() {
       "경상남도 합천군",
     ],
     경상북도: [
-      "경상븍도 전체",
-      "경상븍도 경산시",
-      "경상븍도 경주시",
-      "경상븍도 고령군",
-      "경상븍도 구미시",
-      "경상븍도 군위군",
-      "경상븍도 김천시",
-      "경상븍도 문경시",
-      "경상븍도 봉화군",
-      "경상븍도 상주시",
-      "경상븍도 성주군",
-      "경상븍도 안동시",
-      "경상븍도 영덕군",
-      "경상븍도 영양군",
-      "경상븍도 영주시",
-      "경상븍도 영천시",
-      "경상븍도 예천군",
-      "경상븍도 울릉군",
-      "경상븍도 울진군",
-      "경상븍도 의성군",
-      "경상븍도 청도군",
-      "경상븍도 청송군",
-      "경상븍도 칠곡군",
-      "경상븍도 포항시",
+      "경상북도 전체",
+      "경상북도 경산시",
+      "경상북도 경주시",
+      "경상북도 고령군",
+      "경상북도 구미시",
+      "경상북도 군위군",
+      "경상북도 김천시",
+      "경상북도 문경시",
+      "경상북도 봉화군",
+      "경상북도 상주시",
+      "경상북도 성주군",
+      "경상북도 안동시",
+      "경상북도 영덕군",
+      "경상북도 영양군",
+      "경상북도 영주시",
+      "경상북도 영천시",
+      "경상북도 예천군",
+      "경상북도 울릉군",
+      "경상북도 울진군",
+      "경상북도 의성군",
+      "경상북도 청도군",
+      "경상북도 청송군",
+      "경상북도 칠곡군",
+      "경상북도 포항시",
     ],
     광주광역시: [
       "광주광역시 전체",
@@ -329,7 +329,7 @@ function getAllData() {
   if (localStorage.length == 0) {
     update();
   }
-  else {
+  
     json_description = JSON.parse(localStorage.getItem('json'));
     for (var i = 0; i < 1000; i++) {
       count++;
@@ -340,7 +340,7 @@ function getAllData() {
     }
     document.getElementById("descriptions").innerHTML = description;
     document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
-  }
+  
 }
 
 function getRegionData(region) {
@@ -349,7 +349,7 @@ function getRegionData(region) {
   if (localStorage.length == 0) {
     update();
   }
-  else if (region.length < 1) {
+  if (region.length < 1) {
     getAllData();
   }
   else {
@@ -439,13 +439,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("all_data").onclick = getAllData;
   document.getElementById("to_select_region").onclick = region_controller;
   document.getElementById("select_keyword").onclick = keyword_controller;
-  console.log("외않되?");
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     // document.getElementById("keyword_form").onclick = keyword_controller();
-//     // document.getElementById("select_region").onclick = showSelectRegion();
-// });
 
 
 // window.onload = update();
