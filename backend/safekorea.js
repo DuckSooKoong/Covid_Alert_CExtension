@@ -309,10 +309,6 @@ function showSelectRegion() {
     }
     opt_spec += "</select><input type=\"submit\" id=\"select_region\" value=\"선택하자!\"></form>";
     document.getElementById("descriptions").innerHTML = opt_spec;
-
-
-    
-
 }
 
 function getSelectedRegion(){
@@ -323,6 +319,8 @@ function getSelectedRegion(){
       selArr.push(selectID.options[i].value);
     }
   }
+
+  return selArr
 }
 
 
