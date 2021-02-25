@@ -306,10 +306,24 @@ function showSelectRegion() {
       opt_spec += "<option>" + value + "</option>";
     }
     opt_spec += "</optgroup>"
+    document.getElementById("descriptions").innerHTML = opt_spec;
+}
+
+function getSelectedRegion(){
+  var selectID = document.getElementById("region");
+  var selArr = [];
+  for(var i=0;i<selectID.length;i++){
+    if (selectID.options[i].selected){
+      selArr.push(selectID.options[i].value);
+    }
   }
   opt_spec += "</select><input type=\"submit\" id=\"select_region\" value=\"선택하자!\"></form>";
   document.getElementById("descriptions").innerHTML = opt_spec;
 }
+
+  return selArr
+}
+
 
 function getAllData() {
   var description = base_description;
