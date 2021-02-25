@@ -7,9 +7,7 @@ queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
 let json_description;
-let base_description = "<h1>알림</h1>"
-  + "<div id=\"num_of_result\">"
-  + "</div>"
+let base_description = "<div id=\"num_of_result\">" + "</div>"
 
 function showSelectRegion() {
   var obj = {
@@ -355,12 +353,10 @@ function getRegionData(region) {
     getAllData();
   }
   else {
-    regionArr = getSelectedRegion();
     json_description = JSON.parse(localStorage.getItem('json'));
     for (var i = 0; i < 1000; i++) {
       for (var j = 0; j < region.length; j++) {
-        if (regionArr.includes(json_description.row[i].location_name)) {
-          
+        if (json_description.row[i].location_name==region[j]) {
           count++;
           description += "<div id=\"alert\"><p>"
             + json_description.row[i].create_date + "</p><p>"
@@ -428,8 +424,8 @@ function region_controller() {
     back_to_main();
   });
   select_rgn_btn.addEventListener("click", function () {
-    var region = document.getElementById("region").value;
-    getRegionData(region);
+    var regionArr = getSelectedRegion();
+    getRegionData(regionArr);
   });
 
 }
