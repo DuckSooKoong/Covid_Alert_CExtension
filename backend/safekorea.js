@@ -7,7 +7,13 @@ queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
 let json_description;
-let base_description = "<div id =\"keyword_form\" onsubmit=\"controller()\"><div class=\"description\"><input type=\"text\" id=\"keyword\" name=\"keyword\"></div><input type=\"submit\" value=\"검색\"><div id=\"num_of_result\"></div>"
+let base_description = "<div class=\"description\">" 
+                        + "<div id =\"keyword_form\">"
+                        + "<input type=\"text\" id=\"keyword\">"
+                        + "<input type=\"submit\" id=\"select_keyword\" value=\"검색\">"
+                        + "</div>"
+                        + "<div id=\"num_of_result\">"
+                        + "</div>"
 
 function showSelectRegion() {
     var obj = {
@@ -292,7 +298,7 @@ function showSelectRegion() {
     let opt_spec = "<button id=\"select_all\">돌아가기</button>"
         + "</a><legend>지역 리스트</legend>"
         + "<h4>다중 선택을 위해 Ctrl+클릭을 해주세요</h4>"
-        + "<form onsubmit=\"\">"
+        + "<div id=\"region_form\">"
         + "<select id=\"selectbox\" name=\"지역\" multiple=\"multiple\">"
         
     for (let key in obj) {
@@ -388,11 +394,15 @@ function keyword_controller() {
     getKeywordData(keyword);
 }
 
-window.onload = document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("keyword_form").onclick = keyword_controller();
-    document.getElementById("all_data").onclick = getAllData();
-    document.getElementById("select_region").onclick = showSelectRegion();
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("all_data").onclick = getAllData;
+    document.getElementById("select_keyword").onsubmit = keyword_controller;
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     // document.getElementById("keyword_form").onclick = keyword_controller();
+//     // document.getElementById("select_region").onclick = showSelectRegion();
+// });
 
 
 // window.onload = update();
