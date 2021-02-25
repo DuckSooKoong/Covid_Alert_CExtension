@@ -5,7 +5,11 @@
     
     "browser_action": {
         "default_popup": "/frontend/html/index.html",
+        "default_icon": "/asset/icon.png",
         "default_title": "COVID19 Alert Extension"
+    },
+
+    "icons": { "48": "/asset/icon.png"
     },
 
     "manifest_version": 2
