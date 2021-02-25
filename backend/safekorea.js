@@ -7,10 +7,9 @@ queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
 let json_description;
-let base_description = "<div class=\"description\">"
-                        + "<h1>알림</h1>"
-                        + "<div id=\"num_of_result\">"
-                        + "</div>"
+let base_description =  "<h1>알림</h1>"
+                      + "<div id=\"num_of_result\">"
+                      + "</div>"
 
 function showSelectRegion() {
     var obj = {
@@ -297,7 +296,7 @@ function showSelectRegion() {
         + "</a><legend>지역 리스트</legend>"
         + "<h4>다중 선택을 위해 Ctrl+클릭을 해주세요</h4>"
         + "<div id=\"region_form\">"
-        + "<select id=\"selectbox\" name=\"지역\" multiple=\"multiple\">"
+        + "<select id=\"region\" name=\"지역\" multiple=\"multiple\">"
         
     for (let key in obj) {
         opt_spec += "<optgroup label="
@@ -308,7 +307,7 @@ function showSelectRegion() {
       }
       opt_spec += "</optgroup>"
     }
-    opt_spec += "</select><input type=\"submit\" value=\"선택하자!\"></form>";
+    opt_spec += "</select><input type=\"submit\" id=\"select_region\" value=\"선택하자!\"></form>";
     document.getElementById("descriptions").innerHTML = opt_spec;
   }
 
@@ -322,7 +321,10 @@ function getAllData() {
         json_description = JSON.parse(localStorage.getItem('json'));
         for (var i = 0; i < 1000; i++) {
             count++;
-            description += "<div class=\"description\"><p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
+            description += "<div id=\"alert\"><p>" 
+                        + json_description.row[i].create_date + "</p><p>" 
+                        + json_description.row[i].location_name + "</p><p>" 
+                        + json_description.row[i].msg + "</p></div>";
         }
         document.getElementById("descriptions").innerHTML = description;
         document.getElementById("num_of_result").innerHTML = "<p>총 " + count + "건의 검색 결과가 있습니다.</p>";
@@ -335,13 +337,19 @@ function getRegionData(region) {
     if (localStorage.length == 0) {
         update();
     }
+    else if (region.length < 1) {
+      getAllData();
+    }
     else {
         json_description = JSON.parse(localStorage.getItem('json'));
         for (var i = 0; i < 1000; i++) {
             for (var j = 0; j < region.length; j++) {
-                if (json_description.row[i].location_name == region[j]) {
+                if (json_description.row[i].location_name == region) {
                     count++;
-                    description += "<div class=\"description\"><p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
+                    description += "<div id=\"alert\"><p>" 
+                                + json_description.row[i].create_date + "</p><p>" 
+                                + json_description.row[i].location_name + "</p><p>" 
+                                + json_description.row[i].msg + "</p></div>";
                 }
             }
         }
@@ -355,17 +363,19 @@ function getKeywordData(keyword) {
     if (localStorage.length == 0) {
         update();
     }
+    else if (keyword.length < 1) {
+      getAllData();
+    }
     else {
         json_description = JSON.parse(localStorage.getItem('json'));
         var count = 0;
         for (var i = 0; i < 1000; i++) {
             if ((json_description.row[i].msg).indexOf(keyword) != -1) {
                 count++;
-                description += "<p>" + json_description.row[i].create_date 
-                            + "</p><p>" 
-                            + json_description.row[i].location_name 
-                            + "</p><p>" + json_description.row[i].msg 
-                            + "</p></div>";
+                description += "<div id=\"alert\"><p>" 
+                            + json_description.row[i].create_date + "</p><p>" 
+                            + json_description.row[i].location_name + "</p><p>" 
+                            + json_description.row[i].msg + "</p></div>";
             }
         }
 
@@ -390,7 +400,11 @@ function update() {
     xhr.send();
 }
 
-// window.onload = function() {
+function region_controller() {
+    var region = document.getElementById("region").value;
+    getRegionData(region);
+}
+
 function keyword_controller() {
     var keyword = document.getElementById("keyword").value;
     getKeywordData(keyword);
@@ -398,8 +412,9 @@ function keyword_controller() {
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("all_data").onclick = getAllData;
-    document.getElementById("select_region").onclick = showSelectRegion;
+    document.getElementById("to_select_region").onclick = showSelectRegion;
     document.getElementById("select_keyword").onclick = keyword_controller;
+    document.getElementById("select_region").onclick = region_controller;
 });
 
 // document.addEventListener("DOMContentLoaded", function () {
