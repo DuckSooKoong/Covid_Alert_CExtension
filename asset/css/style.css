@@ -8,9 +8,9 @@ a.button{
 body{
     width: 300px;
     height: auto;
-    min-height: 500px;
     max-height: 500px;
 }
+
 h1{
     text-align: center;
 }
