@@ -7,11 +7,8 @@ queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(
 queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('JSON'); /**/
 queryParams += '&' + encodeURIComponent('flag') + '=' + encodeURIComponent('Y'); /**/
 let json_description;
-let base_description = "<div class=\"description\">" 
-                        + "<div id =\"keyword_form\">"
-                        + "<input type=\"text\" id=\"keyword\">"
-                        + "<input type=\"submit\" id=\"select_keyword\" value=\"검색\">"
-                        + "</div>"
+let base_description = "<div class=\"description\">"
+                        + "<h1>알림</h1>"
                         + "<div id=\"num_of_result\">"
                         + "</div>"
 
@@ -295,7 +292,8 @@ function showSelectRegion() {
       세종특별자치시: ["세종특별자치시 전체", "세종특별자치시"],
       "임진강 수계지역(경기도 연천군,파주시)": ["경기도 파주시", "경기도 연천군"],
     };
-    let opt_spec = "<button id=\"select_all\">돌아가기</button>"
+    let opt_spec = 
+          "<button id=\"select_all\">돌아가기</button>"
         + "</a><legend>지역 리스트</legend>"
         + "<h4>다중 선택을 위해 Ctrl+클릭을 해주세요</h4>"
         + "<div id=\"region_form\">"
@@ -396,7 +394,8 @@ function keyword_controller() {
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("all_data").onclick = getAllData;
-    document.getElementById("select_keyword").onsubmit = keyword_controller;
+    document.getElementById("select_region").onclick = showSelectRegion;
+    document.getElementById("keyword_form").onsubmit = keyword_controller;
 });
 
 // document.addEventListener("DOMContentLoaded", function () {
