@@ -359,9 +359,13 @@ function getKeywordData(keyword) {
         json_description = JSON.parse(localStorage.getItem('json'));
         var count = 0;
         for (var i = 0; i < 1000; i++) {
-            if ((json_description.row[i].msg).indexOf(keyword.value) != -1) {
+            if ((json_description.row[i].msg).indexOf(keyword) != -1) {
                 count++;
-                description += "<p>" + json_description.row[i].create_date + "</p><p>" + json_description.row[i].location_name + "</p><p>" + json_description.row[i].msg + "</p></div>";
+                description += "<p>" + json_description.row[i].create_date 
+                            + "</p><p>" 
+                            + json_description.row[i].location_name 
+                            + "</p><p>" + json_description.row[i].msg 
+                            + "</p></div>";
             }
         }
 
@@ -374,7 +378,7 @@ function update() {
     localStorage.clear();
     xhr.open('GET', url + queryParams);     // 요청 초기화
     
-    document.write("<p>loading...</p>");
+    // document.write("<p>loading...</p>");
     xhr.onreadystatechange = function () {  // readyState 속성이 변경될 때마나 호출
         if (this.readyState == 4) {
             let tmp_json = JSON.parse(this.responseText);
@@ -395,7 +399,7 @@ function keyword_controller() {
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("all_data").onclick = getAllData;
     document.getElementById("select_region").onclick = showSelectRegion;
-    document.getElementById("keyword_form").onsubmit = keyword_controller;
+    document.getElementById("select_keyword").onclick = keyword_controller;
 });
 
 // document.addEventListener("DOMContentLoaded", function () {
