@@ -305,7 +305,7 @@ function showSelectRegion() {
     }
     opt_spec += "</optgroup>"
   }
-  opt_spec += "</select><input type=\"submit\" id=\"select_region\" value=\"선택하자!\"></div>";
+  opt_spec += "</select></div><div><input type=\"submit\" id=\"select_region\" value=\"선택하자!\"></div>";
   document.getElementById("descriptions").innerHTML = opt_spec;
 
 }
