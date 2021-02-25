@@ -11,12 +11,5 @@
 
     "icons": { "48": "/asset/icon.png"
     },
-
-
-    "background": {
-        "scripts": ["/backend/background.js"],
-        "persistent": true
-    },
-
     "manifest_version": 2
 }
