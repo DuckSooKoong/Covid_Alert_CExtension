@@ -320,8 +320,6 @@ function getSelectedRegion() {
       selArr.push(selectID.options[i].value);
     }
   }
-  opt_spec += "</select><input type=\"submit\" id=\"select_region\" value=\"선택하자!\"></div>";
-  document.getElementById("descriptions").innerHTML = opt_spec;
 
   return selArr
 }
@@ -357,10 +355,12 @@ function getRegionData(region) {
     getAllData();
   }
   else {
+    regionArr = getSelectedRegion();
     json_description = JSON.parse(localStorage.getItem('json'));
     for (var i = 0; i < 1000; i++) {
       for (var j = 0; j < region.length; j++) {
-        if (json_description.row[i].location_name == region) {
+        if (regionArr.includes(json_description.row[i].location_name)) {
+          
           count++;
           description += "<div id=\"alert\"><p>"
             + json_description.row[i].create_date + "</p><p>"
