@@ -1,4 +1,5 @@
-# Korea Disaster Alert Chrome Extension(한국 재난알림 크롬확장프로그램)
+# Korea Disaster Alert Chrome Extension
+(한국 재난알림 크롬확장프로그램)
 
 ## 팀 소개
 * 저희 DuckSooKoog은 [서성덕](https://github.com/dk-kling), [김현수](https://github.com/Nicholas-Kim)로 이루어져있습니다. 
