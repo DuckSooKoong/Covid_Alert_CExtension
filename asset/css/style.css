@@ -3,6 +3,7 @@ body{
     height: auto;
     max-height: 500px;
     -ms-overflow-style: none;
+    background-color: #EBEFF2;
 }
 
 ::-webkit-scrollbar { display: none; }
@@ -18,9 +19,9 @@ div{
 }
 
 input[type=button], input[type=submit], input[type=reset] {
-    background-color: #4c6baf;
+    background-color: #365673;
     border: none;
-    color: white;
+    color: #EBEFF2;
     padding: 6px 12px;
     text-decoration: none;
     margin: 2px 1px;
@@ -34,6 +35,12 @@ input[type=button], input[type=submit], input[type=reset] {
 input[type=text] {
     border: 0;
     padding: 7px 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #A9C6D9;
     background: transparent;
+}
+
+#alert {
+    padding: 2px;
+    background-color: #6D8BA6;
+    color: #EBEFF2;
 }
